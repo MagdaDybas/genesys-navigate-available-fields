@@ -1,0 +1,2945 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Genesys Navigate — Harvest Planning · Available Fields</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+/**
+ * Genesys Navigate — Harvest Planning · Available Fields
+ * Visual tokens aligned with pep-ui / Bayer enterprise chrome from local prototypes.
+ */
+:root {
+  --header-h: 55px;
+  --rail-w: 56px;
+  --bulk-h: 56px;
+  --primary: #0072bc;
+  --primary-light: #1288d2;
+  --primary-dark: #185f97;
+  --secondary: #c65315;
+  --tab-accent: #e87722;
+  --error: #cf2d22;
+  --success: #01830c;
+  --success-bg: #e8f7ea;
+  --progress-bg: #e3f2fd;
+  --progress-fg: #1565c0;
+  --bg-page: #f5f5f5;
+  --paper: #ffffff;
+  --ink: rgba(0, 0, 0, 0.87);
+  --ink-secondary: rgba(0, 0, 0, 0.6);
+  --ink-muted: rgba(0, 0, 0, 0.45);
+  --border: #e0e0e0;
+  --border-strong: #bdbdbd;
+  --assigned-tint: #eef6fb;
+  --assigned-border: #c5dde9;
+  --lane-col-tint: #fff8f0;
+  --lane-col-border: #f0d4b8;
+  --focus: #0072bc;
+  --radius: 4px;
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg-page);
+  color: var(--ink);
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* —— Top bar —— */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+  padding: 0 12px 0 16px;
+  background: var(--primary-dark);
+  color: #fff;
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.brand-name {
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.icon-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.icon-btn.muted {
+  color: var(--ink-secondary);
+}
+
+.icon-btn.muted:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.icon-btn svg,
+.rail-btn svg,
+.ctrl-btn svg,
+.tab svg,
+.metric svg,
+.btn svg,
+.search-field svg,
+.actions svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  margin-left: 6px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* —— Body / rail —— */
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.rail {
+  width: var(--rail-w);
+  flex-shrink: 0;
+  background: #eceff1;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  gap: 4px;
+}
+
+.rail-btn {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #455a64;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.rail-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.rail-btn.is-active {
+  background: var(--primary);
+  color: #fff;
+}
+
+.rail-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.rail-btn-bottom {
+  margin-top: auto;
+}
+
+/* —— Main —— */
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  padding-bottom: calc(var(--bulk-h) + 8px);
+}
+
+.context-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--border);
+  background: #fafafa;
+  flex-wrap: wrap;
+}
+
+.date-strip {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.day-card {
+  flex: 0 0 auto;
+  min-width: 108px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--primary-dark);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.day-card:hover {
+  border-color: var(--primary-light);
+}
+
+.day-card:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.day-card.is-selected {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(24, 95, 151, 0.35);
+}
+
+.day-card .day-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.day-card .day-date {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.day-card .day-status {
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+.context-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.season-label {
+  margin: 0 0 0 8px;
+  font-size: 0.875rem;
+  color: var(--ink-secondary);
+  white-space: nowrap;
+}
+
+.ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--primary-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.ctrl-btn.soft {
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.ctrl-btn:hover {
+  background: #f5f9fc;
+}
+
+.ctrl-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.ctrl-btn .chev,
+.btn .chev {
+  width: 16px;
+  height: 16px;
+}
+
+.range-btn {
+  color: var(--ink);
+}
+
+/* —— Workspace —— */
+.workspace {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 0 16px 16px;
+}
+
+.tabs-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 14px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--ink-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.tab.is-active {
+  color: var(--primary-dark);
+  border-bottom-color: var(--tab-accent);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.metrics {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 10px;
+  color: var(--ink-secondary);
+  font-size: 0.875rem;
+}
+
+.metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metric-capacity {
+  color: var(--success);
+  font-weight: 500;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 0 8px;
+}
+
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-right: 4px;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--paper);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--primary-dark);
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-chip:has(input:checked) {
+  background: #e3f2fd;
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+.filter-chip:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.filter-chip input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--primary);
+  margin: 0;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--ink-secondary);
+  cursor: pointer;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-ui {
+  width: 34px;
+  height: 18px;
+  border-radius: 999px;
+  background: #cfd8dc;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.toggle-ui::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s ease;
+}
+
+.toggle input:checked + .toggle-ui {
+  background: var(--primary);
+}
+
+.toggle input:checked + .toggle-ui::after {
+  transform: translateX(16px);
+}
+
+.toggle input:focus-visible + .toggle-ui {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.search-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  min-width: 220px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink-secondary);
+}
+
+.search-field input {
+  border: 0;
+  outline: 0;
+  width: 100%;
+  background: transparent;
+  color: var(--ink);
+}
+
+.search-field:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0, 114, 188, 0.2);
+}
+
+.context-hint {
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  background: #eef6fb;
+  border: 1px solid var(--assigned-border);
+  color: var(--primary-dark);
+  font-size: 0.8125rem;
+}
+
+.context-hint strong {
+  font-weight: 700;
+}
+
+/* —— Table —— */
+.table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.fields-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8125rem;
+  table-layout: auto;
+}
+
+.fields-table th,
+.fields-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.fields-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f7f9fa;
+  color: var(--ink-secondary);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  border-bottom: 1px solid var(--border-strong);
+  overflow: visible;
+}
+
+.th-stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.th-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 2px 4px;
+  margin: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.th-sort:hover {
+  background: rgba(0, 114, 188, 0.08);
+  color: var(--primary-dark);
+}
+
+.th-sort:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.sort-ind {
+  font-size: 0.7rem;
+  opacity: 0.35;
+  font-weight: 700;
+}
+
+.sort-ind.is-active {
+  opacity: 1;
+  color: var(--primary);
+}
+
+.th-filter {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink-muted);
+  flex-shrink: 0;
+}
+
+.th-filter svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.th-filter:hover,
+.th-filter.is-open {
+  background: rgba(0, 114, 188, 0.1);
+  color: var(--primary-dark);
+}
+
+.th-filter.is-filtered {
+  color: var(--secondary);
+  background: rgba(232, 119, 34, 0.12);
+}
+
+.th-filter:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.col-filter-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 20;
+  min-width: 168px;
+  max-width: 220px;
+  max-height: 240px;
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.col-lane .col-filter-menu,
+.col-actions .col-filter-menu {
+  left: auto;
+  right: 0;
+}
+
+.col-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 4px;
+  font-size: 0.78rem;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.col-filter-option:hover {
+  background: #eef6fb;
+}
+
+.col-filter-option input {
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+.col-filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.col-filter-empty {
+  margin: 4px 0;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.link-btn {
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+.link-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  padding: 6px 0;
+}
+
+.active-filters[hidden] {
+  display: none !important;
+}
+
+.active-filters-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-secondary);
+}
+
+.filter-chip-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--primary-light);
+  border-radius: 999px;
+  background: #e3f2fd;
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.filter-chip-active:hover {
+  background: #bbdefb;
+}
+
+.fields-table thead th.col-lane,
+.fields-table thead th.col-assigned {
+  z-index: 4;
+}
+
+.fields-table tbody tr:hover {
+  background: #fafcfd;
+}
+
+.fields-table tbody tr.is-selected {
+  background: #f3f8fc;
+}
+
+.fields-table tbody tr.has-draft {
+  box-shadow: inset 3px 0 0 var(--tab-accent);
+}
+
+/* Assigned-to column — read-only, visually separated */
+.col-assigned,
+td.col-assigned {
+  background: var(--assigned-tint) !important;
+  border-right: 2px solid var(--assigned-border);
+  min-width: 132px;
+  max-width: 160px;
+}
+
+.fields-table thead th.col-assigned {
+  z-index: 3;
+}
+
+.th-label {
+  display: block;
+  color: var(--primary-dark);
+}
+
+.th-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 1px;
+}
+
+.assigned-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--ink);
+  font-weight: 500;
+  cursor: default;
+  user-select: none;
+}
+
+.assigned-cell.is-empty {
+  color: var(--ink-muted);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.assigned-cell.is-multi {
+  color: var(--primary-dark);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  cursor: help;
+  position: relative;
+}
+
+.assigned-popover {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  z-index: 10;
+  min-width: 160px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  color: var(--ink);
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.assigned-popover[hidden] {
+  display: none;
+}
+
+.assigned-popover strong {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--ink-secondary);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.assigned-popover ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.assigned-popover li {
+  padding: 3px 0;
+  font-size: 0.78rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.assigned-popover li:last-child {
+  border-bottom: 0;
+}
+
+.col-drag {
+  width: 28px;
+  padding-left: 6px !important;
+  padding-right: 0 !important;
+  color: var(--ink-muted);
+}
+
+.drag-handle {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: #90a4ae;
+  cursor: grab;
+}
+
+.drag-handle svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.col-check {
+  width: 36px;
+}
+
+.col-num {
+  color: var(--primary);
+  font-weight: 500;
+  min-width: 64px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.status-pill.planned {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.status-pill.in-progress {
+  background: var(--progress-bg);
+  color: var(--progress-fg);
+}
+
+.status-pill.not-planned {
+  background: #eceff1;
+  color: #546e7a;
+}
+
+.col-name,
+.col-hybrid,
+.col-harvest {
+  color: var(--ink);
+  min-width: 110px;
+}
+
+.col-area {
+  color: var(--ink-secondary);
+  min-width: 100px;
+}
+
+.picker-select {
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  min-width: 100px;
+}
+
+.picker-select:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+/* Editable lane column — visually prioritized */
+.col-lane,
+td.col-lane {
+  background: var(--lane-col-tint) !important;
+  border-left: 2px solid var(--lane-col-border);
+  min-width: 148px;
+}
+
+.fields-table thead th.col-lane {
+  z-index: 3;
+  color: var(--secondary);
+  font-size: 0.78rem;
+}
+
+.lane-select {
+  height: 32px;
+  width: 100%;
+  min-width: 128px;
+  padding: 0 8px;
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--primary-dark);
+  font-weight: 500;
+  font-size: 0.8125rem;
+}
+
+.lane-select.is-empty {
+  color: var(--ink-muted);
+  font-weight: 400;
+  border-style: dashed;
+  border-color: var(--border-strong);
+}
+
+.lane-select.is-draft {
+  border-color: var(--tab-accent);
+  box-shadow: 0 0 0 1px rgba(232, 119, 34, 0.25);
+}
+
+.lane-select:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.col-actions {
+  width: 72px;
+}
+
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.actions .icon-btn {
+  width: 30px;
+  height: 30px;
+  color: var(--primary);
+}
+
+.actions .icon-btn:hover {
+  background: rgba(0, 114, 188, 0.08);
+}
+
+.empty-state {
+  margin: 0;
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--ink-secondary);
+  font-size: 0.9rem;
+}
+
+.view-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.view-panel[hidden] {
+  display: none !important;
+}
+
+.lanes-sub {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--ink-secondary);
+}
+
+.lanes-board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(160px, 1fr));
+  gap: 12px;
+  flex: 1;
+  min-height: 280px;
+  overflow: auto;
+  padding-bottom: 8px;
+}
+
+.lane-column {
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fafafa;
+  overflow: hidden;
+}
+
+.lane-column-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+}
+
+.lane-column-head h2 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.lane-count {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #e3f2fd;
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-grid;
+  place-items: center;
+}
+
+.lane-column-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  flex: 1;
+}
+
+.lane-empty {
+  margin: 12px 0;
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+  font-style: italic;
+}
+
+.lane-card {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.lane-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.lane-card-num {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+
+.lane-card-name {
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+
+.lane-card-meta {
+  margin-top: 2px;
+  font-size: 0.72rem;
+  color: var(--ink-secondary);
+}
+
+@media (max-width: 1200px) {
+  .lanes-board {
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+  }
+}
+
+/* —— Bulk bar —— */
+.bulk-bar {
+  position: fixed;
+  right: 16px;
+  bottom: 12px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: var(--bulk-h);
+  padding: 8px 14px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+.bulk-bar[hidden] {
+  display: none !important;
+}
+
+.bulk-meta {
+  font-size: 0.8125rem;
+  color: var(--ink-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dirty-count.is-dirty {
+  color: var(--secondary);
+  font-weight: 500;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.assign-menu-wrap {
+  position: relative;
+}
+
+.assign-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  min-width: 140px;
+  background: var(--paper);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  z-index: 40;
+}
+
+.assign-menu li {
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.assign-menu li:hover,
+.assign-menu li:focus {
+  background: #eef6fb;
+  color: var(--primary-dark);
+  outline: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--paper);
+  border-color: var(--border-strong);
+  color: var(--ink);
+}
+
+.btn-secondary:not(:disabled):hover {
+  background: #f5f5f5;
+}
+
+.btn-primary {
+  background: var(--success);
+  color: #fff;
+  border-color: var(--success);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: #016a0a;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 80px;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  background: #263238;
+  color: #fff;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1100px) {
+  .season-label {
+    width: 100%;
+    margin: 4px 0 0;
+    text-align: right;
+  }
+
+  .bulk-bar {
+    left: calc(var(--rail-w) + 12px);
+    right: 12px;
+    justify-content: space-between;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar" role="banner">
+        <div class="topbar-left">
+          <div class="brand" aria-label="Genesys Navigate">
+            <span class="brand-mark" aria-hidden="true">G</span>
+            <span class="brand-name">Genesys Navigate</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="icon-btn" aria-label="Search">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" />
+              <path d="M16 16l4 4" />
+            </svg>
+          </button>
+          <button type="button" class="icon-btn" aria-label="Applications">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="4" width="6" height="6" rx="1" />
+              <rect x="14" y="4" width="6" height="6" rx="1" />
+              <rect x="4" y="14" width="6" height="6" rx="1" />
+              <rect x="14" y="14" width="6" height="6" rx="1" />
+            </svg>
+          </button>
+          <button type="button" class="icon-btn" aria-label="Messages">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16v11H4z" />
+              <path d="M4 7l8 6 8-6" />
+            </svg>
+          </button>
+          <button type="button" class="icon-btn" aria-label="Chat">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 6h14a1 1 0 011 1v8a1 1 0 01-1 1H9l-4 3V7a1 1 0 011-1z" />
+            </svg>
+          </button>
+          <button type="button" class="icon-btn" aria-label="Help">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" />
+              <path d="M9.8 9.6a2.4 2.4 0 114.2 1.6c-.7.7-1.5 1.1-1.5 2.3" />
+              <circle cx="12" cy="16.6" r="0.8" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
+          <button type="button" class="avatar" aria-label="User profile">U</button>
+        </div>
+      </header>
+
+      <div class="body">
+        <nav class="rail" aria-label="Primary">
+          <button type="button" class="rail-btn" aria-label="Dashboard" title="Dashboard">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 11.5L12 5l8 6.5V20H4z" />
+              <path d="M10 20v-6h4v6" />
+            </svg>
+          </button>
+          <button type="button" class="rail-btn" aria-label="Locations" title="Locations">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s6-5.2 6-10a6 6 0 10-12 0c0 4.8 6 10 6 10z" />
+              <circle cx="12" cy="11" r="2.2" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="rail-btn is-active"
+            aria-label="Harvest Planning"
+            title="Harvest Planning"
+            aria-current="page"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 16h16" />
+              <path d="M7 16V9l4-2 2 3 4-1v7" />
+              <circle cx="8" cy="18" r="1.5" />
+              <circle cx="16" cy="18" r="1.5" />
+            </svg>
+          </button>
+          <button type="button" class="rail-btn" aria-label="Transport" title="Transport">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 15h11V8H3z" />
+              <path d="M14 11h4l3 3v1h-7z" />
+              <circle cx="7" cy="17.5" r="1.5" />
+              <circle cx="17" cy="17.5" r="1.5" />
+            </svg>
+          </button>
+          <button type="button" class="rail-btn" aria-label="Analytics" title="Analytics">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 18V10M12 18V6M19 18v-5" />
+            </svg>
+          </button>
+          <button type="button" class="rail-btn rail-btn-bottom" aria-label="Settings" title="Settings">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M12 4.5l1.2 2.1 2.4-.3 1.2 2.1-1.8 1.5.6 2.3-2.2.9-1.4 2-2.4-.3L8.4 17l-1.8-1.5.6-2.3-1.8-1.5 1.2-2.1 2.4.3z"
+              />
+            </svg>
+          </button>
+        </nav>
+
+        <main class="content" id="main">
+          <!-- Date / filter bar -->
+          <section class="context-bar" aria-label="Planning context">
+            <div class="date-strip" role="listbox" aria-label="Harvest date" id="dateStrip">
+              <!-- day cards injected -->
+            </div>
+
+            <div class="context-controls">
+              <button type="button" class="ctrl-btn range-btn" aria-label="Date range Nov 9 – Nov 15">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="5" width="16" height="15" rx="2" />
+                  <path d="M8 3v4M16 3v4M4 10h16" />
+                </svg>
+                <span id="rangeLabel">Nov 9 – Nov 15</span>
+              </button>
+              <button type="button" class="ctrl-btn">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 6h16M7 12h10M10 18h4" />
+                </svg>
+                All Filters
+              </button>
+              <button type="button" class="icon-btn muted" aria-label="More options">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="6" r="1.4" fill="currentColor" stroke="none" />
+                  <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+                  <circle cx="12" cy="18" r="1.4" fill="currentColor" stroke="none" />
+                </svg>
+              </button>
+              <p class="season-label">Waco Corn Early/Late 2026</p>
+            </div>
+          </section>
+
+          <section class="workspace">
+            <div class="tabs-row">
+              <div class="tabs" role="tablist" aria-label="Harvest planning views">
+                <button
+                  type="button"
+                  class="tab"
+                  role="tab"
+                  id="tabLanes"
+                  aria-selected="false"
+                  aria-controls="panelLanes"
+                  tabindex="-1"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 7h16M4 12h16M4 17h10" />
+                  </svg>
+                  Lanes
+                </button>
+                <button
+                  type="button"
+                  class="tab is-active"
+                  role="tab"
+                  id="tabFields"
+                  aria-selected="true"
+                  aria-controls="panelFields"
+                  tabindex="0"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 18V8l4-3 4 3 4-2 4 3v9" />
+                    <path d="M4 18h16" />
+                  </svg>
+                  Fields
+                </button>
+              </div>
+              <div class="metrics" aria-label="Season metrics">
+                <span class="metric metric-capacity" title="Planned / capacity">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 18V10M12 18V6M19 18v-5" />
+                  </svg>
+                  <span>10,000 / 120,000</span>
+                </span>
+                <span class="metric" title="Assigned trucks">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 15h11V8H3z" />
+                    <path d="M14 11h4l3 3v1h-7z" />
+                    <circle cx="7" cy="17.5" r="1.5" />
+                    <circle cx="17" cy="17.5" r="1.5" />
+                  </svg>
+                  <span>10</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Fields view -->
+            <div
+              class="view-panel"
+              id="panelFields"
+              role="tabpanel"
+              aria-labelledby="tabFields"
+            >
+              <div class="toolbar">
+                <div class="toolbar-left">
+                  <h1 class="sr-only" id="availableFieldsHeading">Available Fields</h1>
+                  <span class="section-title" aria-hidden="true">Available Fields</span>
+
+                  <label class="filter-chip" for="unassignedOnly">
+                    <input type="checkbox" id="unassignedOnly" />
+                    <span>Unassigned fields</span>
+                  </label>
+
+                  <label class="toggle">
+                    <input type="checkbox" id="groupByPickers" />
+                    <span class="toggle-ui" aria-hidden="true"></span>
+                    <span>Group by Pickers</span>
+                  </label>
+
+                  <button type="button" class="ctrl-btn soft">
+                    HOM Recommendation
+                    <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M7 10l5 5 5-5" />
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="toolbar-right">
+                  <label class="search-field">
+                    <span class="sr-only">Search Fields</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="11" cy="11" r="6.5" />
+                      <path d="M16 16l4 4" />
+                    </svg>
+                    <input
+                      type="search"
+                      id="searchFields"
+                      placeholder="Search Fields"
+                      autocomplete="off"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <p class="context-hint" id="contextHint" aria-live="polite">
+                Planning for <strong>Nov 10</strong> — table shows all season fields.
+                Use <strong>Lane for Nov 10</strong> to assign.
+              </p>
+
+              <div class="active-filters" id="activeFilters" hidden></div>
+
+              <div class="table-wrap">
+                <table class="fields-table" id="fieldsTable">
+                  <thead id="fieldsHead">
+                    <!-- headers injected -->
+                  </thead>
+                  <tbody id="fieldsBody">
+                    <!-- rows injected -->
+                  </tbody>
+                </table>
+                <p class="empty-state" id="emptyState" hidden>No fields match the current filters.</p>
+              </div>
+            </div>
+
+            <!-- Lanes view -->
+            <div
+              class="view-panel"
+              id="panelLanes"
+              role="tabpanel"
+              aria-labelledby="tabLanes"
+              hidden
+            >
+              <div class="toolbar">
+                <div class="toolbar-left">
+                  <h1 class="section-title" id="lanesHeading">Lane view</h1>
+                  <p class="lanes-sub" id="lanesSub">Fields grouped by lane for the selected date.</p>
+                </div>
+              </div>
+              <p class="context-hint" id="lanesHint" aria-live="polite"></p>
+              <div class="lanes-board" id="lanesBoard" aria-live="polite">
+                <!-- lane columns injected -->
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <footer class="bulk-bar" id="bulkBar" aria-label="Bulk actions">
+        <div class="bulk-meta">
+          <span id="selectionCount">0 fields selected</span>
+          <span class="bulk-sep" aria-hidden="true">·</span>
+          <span id="dirtyCount" class="dirty-count">No unsaved changes</span>
+        </div>
+        <div class="bulk-actions">
+          <div class="assign-menu-wrap">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="assignToBtn"
+              disabled
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="assignToMenu"
+            >
+              Assign To
+              <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 10l5 5 5-5" />
+              </svg>
+            </button>
+            <ul class="assign-menu" id="assignToMenu" role="listbox" hidden>
+              <li role="option" data-lane="">Unassigned</li>
+              <li role="option" data-lane="1">Lane 1</li>
+              <li role="option" data-lane="2">Lane 2</li>
+              <li role="option" data-lane="3">Lane 3</li>
+              <li role="option" data-lane="4">Lane 4</li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-primary" id="saveBtn" disabled>Save Changes</button>
+        </div>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script>
+/**
+ * Genesys Navigate — Harvest Planning · Available Fields
+ * Interactive prototype: date context ≠ table filter; Assigned to = season overview.
+ */
+
+(function () {
+  "use strict";
+
+  const LANES = [
+    { value: "", label: "Assign lane" },
+    { value: "1", label: "Lane 1" },
+    { value: "2", label: "Lane 2" },
+    { value: "3", label: "Lane 3" },
+    { value: "4", label: "Lane 4" },
+  ];
+
+  const PICKERS = ["ALPHA", "BRAVO", "CHARLIE", "DELTA"];
+
+  /** Planning dates for the week (season remains Waco Corn Early/Late 2026). */
+  const DATES = [
+    { id: "2026-11-09", weekday: "Mon", short: "Nov 9", full: "11/09/26", status: "Planned" },
+    { id: "2026-11-10", weekday: "Tue", short: "Nov 10", full: "11/10/26", status: "Planned", today: true },
+    { id: "2026-11-11", weekday: "Wed", short: "Nov 11", full: "11/11/26", status: "Planned" },
+    { id: "2026-11-12", weekday: "Thu", short: "Nov 12", full: "11/12/26", status: "Unplanned" },
+    { id: "2026-11-13", weekday: "Fri", short: "Nov 13", full: "11/13/26", status: "Unplanned" },
+    { id: "2026-11-14", weekday: "Sat", short: "Nov 14", full: "11/14/26", status: "Unplanned" },
+    { id: "2026-11-15", weekday: "Sun", short: "Nov 15", full: "11/15/26", status: "Unplanned" },
+  ];
+
+  /**
+   * Saved seasonal assignments: { dateId, lane }.
+   * Drafts live in state.drafts[fieldId][dateId] = lane | "".
+   */
+  /**
+   * Field statuses (display):
+   * - Not Planned: no date/lane assignment this season
+   * - Planned: has at least one assignment, not currently harvesting
+   * - In Progress: currently being harvested (requires an assignment)
+   */
+  const FIELDS = [
+    {
+      id: "f115",
+      num: 115,
+      harvesting: false,
+      name: "North Bend 12",
+      hybrid: "DKC62-08",
+      area: "North Bend",
+      picker: "ALPHA",
+      harvest: "Early",
+      assignments: [{ dateId: "2026-11-10", lane: "1" }],
+    },
+    {
+      id: "f160",
+      num: 160,
+      harvesting: false,
+      name: "Creek Flat 4",
+      hybrid: "DKC60-87",
+      area: "Creek Flat",
+      picker: "BRAVO",
+      harvest: "Early",
+      assignments: [{ dateId: "2026-11-11", lane: "3" }],
+    },
+    {
+      id: "f171",
+      num: 171,
+      harvesting: true,
+      name: "River Road 9",
+      hybrid: "DKC63-91",
+      area: "River Road",
+      picker: "CHARLIE",
+      harvest: "Late",
+      assignments: [
+        { dateId: "2026-11-10", lane: "2" },
+        { dateId: "2026-11-11", lane: "1" },
+      ],
+    },
+    {
+      id: "f188",
+      num: 188,
+      harvesting: false,
+      name: "South Ridge 2",
+      hybrid: "DKC59-82",
+      area: "Unassigned",
+      picker: "ALPHA",
+      harvest: "Early",
+      assignments: [],
+    },
+    {
+      id: "f192",
+      num: 192,
+      harvesting: false,
+      name: "West Meadow 7",
+      hybrid: "DKC61-41",
+      area: "West Meadow",
+      picker: "DELTA",
+      harvest: "Late",
+      assignments: [{ dateId: "2026-11-10", lane: "4" }],
+    },
+    {
+      id: "f205",
+      num: 205,
+      harvesting: false,
+      name: "East Hollow 1",
+      hybrid: "DKC64-35",
+      area: "Unassigned",
+      picker: "BRAVO",
+      harvest: "Early",
+      assignments: [],
+    },
+    {
+      id: "f210",
+      num: 210,
+      harvesting: false,
+      name: "Prairie Edge 15",
+      hybrid: "DKC58-77",
+      area: "Prairie Edge",
+      picker: "CHARLIE",
+      harvest: "Late",
+      assignments: [{ dateId: "2026-11-12", lane: "2" }],
+    },
+    {
+      id: "f224",
+      num: 224,
+      harvesting: false,
+      name: "Oak Grove 3",
+      hybrid: "DKC62-20",
+      area: "Oak Grove",
+      picker: "ALPHA",
+      harvest: "Early",
+      assignments: [
+        { dateId: "2026-11-09", lane: "1" },
+        { dateId: "2026-11-13", lane: "3" },
+      ],
+    },
+    {
+      id: "f231",
+      num: 231,
+      harvesting: false,
+      name: "Cottonwood 8",
+      hybrid: "DKC60-19",
+      area: "Cottonwood",
+      picker: "DELTA",
+      harvest: "Late",
+      assignments: [{ dateId: "2026-11-11", lane: "2" }],
+    },
+    {
+      id: "f248",
+      num: 248,
+      harvesting: false,
+      name: "Hilltop 6",
+      hybrid: "DKC63-04",
+      area: "Unassigned",
+      picker: "BRAVO",
+      harvest: "Early",
+      assignments: [],
+    },
+  ];
+
+  const STATUS_ORDER = { "Not Planned": 0, Planned: 1, "In Progress": 2 };
+
+  const state = {
+    selectedDateId: "2026-11-10",
+    activeView: "fields", // "fields" | "lanes"
+    unassignedOnly: false,
+    search: "",
+    selectedIds: new Set(),
+    /** drafts[fieldId][dateId] = lane string ("" = explicitly unassigned draft) */
+    drafts: {},
+    assignMenuOpen: false,
+    /** @type {{ key: string|null, dir: 'asc'|'desc' }} */
+    sort: { key: "num", dir: "asc" },
+    /**
+     * Column filters. Empty Set / 'all' = no restriction.
+     * assigned: 'all' | 'yes' | 'no'
+     * status/hybrid/area/picker/harvest/lane: Set of selected values (empty = all)
+     */
+    filters: {
+      assigned: "all",
+      status: new Set(),
+      hybrid: new Set(),
+      area: new Set(),
+      picker: new Set(),
+      harvest: new Set(),
+      lane: new Set(),
+    },
+    openFilter: null,
+  };
+
+  const els = {
+    dateStrip: document.getElementById("dateStrip"),
+    fieldsHead: document.getElementById("fieldsHead"),
+    fieldsBody: document.getElementById("fieldsBody"),
+    contextHint: document.getElementById("contextHint"),
+    activeFilters: document.getElementById("activeFilters"),
+    unassignedOnly: document.getElementById("unassignedOnly"),
+    searchFields: document.getElementById("searchFields"),
+    emptyState: document.getElementById("emptyState"),
+    fieldsTable: document.getElementById("fieldsTable"),
+    selectionCount: document.getElementById("selectionCount"),
+    dirtyCount: document.getElementById("dirtyCount"),
+    assignToBtn: document.getElementById("assignToBtn"),
+    assignToMenu: document.getElementById("assignToMenu"),
+    saveBtn: document.getElementById("saveBtn"),
+    toast: document.getElementById("toast"),
+    tabFields: document.getElementById("tabFields"),
+    tabLanes: document.getElementById("tabLanes"),
+    panelFields: document.getElementById("panelFields"),
+    panelLanes: document.getElementById("panelLanes"),
+    lanesBoard: document.getElementById("lanesBoard"),
+    lanesHint: document.getElementById("lanesHint"),
+    lanesSub: document.getElementById("lanesSub"),
+    bulkBar: document.getElementById("bulkBar"),
+  };
+
+  function dateById(id) {
+    return DATES.find((d) => d.id === id);
+  }
+
+  function shortLabel(dateId) {
+    return dateById(dateId)?.short ?? dateId;
+  }
+
+  function getSavedLane(field, dateId) {
+    const hit = field.assignments.find((a) => a.dateId === dateId);
+    return hit ? hit.lane : null;
+  }
+
+  /** Effective lane for a date: draft if present, else saved. */
+  function getEffectiveLane(field, dateId) {
+    const draftMap = state.drafts[field.id];
+    if (draftMap && Object.prototype.hasOwnProperty.call(draftMap, dateId)) {
+      return draftMap[dateId];
+    }
+    return getSavedLane(field, dateId);
+  }
+
+  function hasDraft(fieldId) {
+    const draftMap = state.drafts[fieldId];
+    if (!draftMap) return false;
+    return Object.keys(draftMap).length > 0;
+  }
+
+  function countDirty() {
+    let n = 0;
+    for (const field of FIELDS) {
+      const draftMap = state.drafts[field.id];
+      if (!draftMap) continue;
+      for (const dateId of Object.keys(draftMap)) {
+        const draft = draftMap[dateId];
+        const saved = getSavedLane(field, dateId);
+        const savedNorm = saved == null ? "" : saved;
+        if (draft !== savedNorm) n += 1;
+      }
+    }
+    return n;
+  }
+
+  /** Season overview from saved assignments only (not drafts). */
+  function getSavedAssignments(field) {
+    return field.assignments
+      .slice()
+      .sort((a, b) => a.dateId.localeCompare(b.dateId));
+  }
+
+  function isSeasonUnassigned(field) {
+    return getSavedAssignments(field).length === 0;
+  }
+
+  function formatAssignedOverview(field) {
+    const list = getSavedAssignments(field);
+    if (list.length === 0) {
+      return { kind: "empty", text: "Not assigned" };
+    }
+    if (list.length === 1) {
+      return {
+        kind: "single",
+        text: `${shortLabel(list[0].dateId)} · Lane ${list[0].lane}`,
+      };
+    }
+    return { kind: "multi", text: `${list.length} assignments`, list };
+  }
+
+  function uniqueSorted(values) {
+    return [...new Set(values)].sort((a, b) => String(a).localeCompare(String(b)));
+  }
+
+  function setHasFilter(set) {
+    return set instanceof Set && set.size > 0;
+  }
+
+  function hasActiveColumnFilters() {
+    const f = state.filters;
+    return (
+      f.assigned !== "all" ||
+      setHasFilter(f.status) ||
+      setHasFilter(f.hybrid) ||
+      setHasFilter(f.area) ||
+      setHasFilter(f.picker) ||
+      setHasFilter(f.harvest) ||
+      setHasFilter(f.lane)
+    );
+  }
+
+  function clearColumnFilters() {
+    state.filters = {
+      assigned: "all",
+      status: new Set(),
+      hybrid: new Set(),
+      area: new Set(),
+      picker: new Set(),
+      harvest: new Set(),
+      lane: new Set(),
+    };
+    state.unassignedOnly = false;
+    els.unassignedOnly.checked = false;
+    state.openFilter = null;
+  }
+
+  function sortValue(field, key) {
+    switch (key) {
+      case "assigned":
+        return getSavedAssignments(field).length;
+      case "num":
+        return field.num;
+      case "status":
+        return STATUS_ORDER[getFieldStatus(field)] ?? 99;
+      case "name":
+        return field.name.toLowerCase();
+      case "hybrid":
+        return field.hybrid.toLowerCase();
+      case "area":
+        return field.area.toLowerCase();
+      case "picker":
+        return field.picker.toLowerCase();
+      case "harvest":
+        return field.harvest.toLowerCase();
+      case "lane": {
+        const lane = getEffectiveLane(field, state.selectedDateId);
+        if (lane == null || lane === "") return 999;
+        return Number(lane);
+      }
+      default:
+        return 0;
+    }
+  }
+
+  function compareFields(a, b) {
+    const { key, dir } = state.sort;
+    if (!key) return a.num - b.num;
+    const av = sortValue(a, key);
+    const bv = sortValue(b, key);
+    let cmp = 0;
+    if (typeof av === "number" && typeof bv === "number") cmp = av - bv;
+    else cmp = String(av).localeCompare(String(bv));
+    if (cmp === 0) cmp = a.num - b.num;
+    return dir === "desc" ? -cmp : cmp;
+  }
+
+  function passesSetFilter(set, value) {
+    if (!setHasFilter(set)) return true;
+    return set.has(value);
+  }
+
+  function visibleFields() {
+    const q = state.search.trim().toLowerCase();
+    const f = state.filters;
+
+    const rows = FIELDS.filter((field) => {
+      if (state.unassignedOnly && !isSeasonUnassigned(field)) return false;
+
+      if (f.assigned === "yes" && isSeasonUnassigned(field)) return false;
+      if (f.assigned === "no" && !isSeasonUnassigned(field)) return false;
+
+      if (!passesSetFilter(f.status, getFieldStatus(field))) return false;
+      if (!passesSetFilter(f.hybrid, field.hybrid)) return false;
+      if (!passesSetFilter(f.area, field.area)) return false;
+      if (!passesSetFilter(f.picker, field.picker)) return false;
+      if (!passesSetFilter(f.harvest, field.harvest)) return false;
+
+      if (setHasFilter(f.lane)) {
+        const lane = getEffectiveLane(field, state.selectedDateId);
+        const key = lane == null || lane === "" ? "" : String(lane);
+        if (!f.lane.has(key)) return false;
+      }
+
+      if (q) {
+        const hay = [field.num, field.name, field.hybrid, field.area, field.picker, field.harvest]
+          .join(" ")
+          .toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+
+    return rows.sort(compareFields);
+  }
+
+  function cycleSort(key) {
+    if (state.sort.key !== key) {
+      state.sort = { key, dir: "asc" };
+    } else if (state.sort.dir === "asc") {
+      state.sort = { key, dir: "desc" };
+    } else {
+      state.sort = { key: "num", dir: "asc" };
+    }
+    state.openFilter = null;
+    renderTable();
+  }
+
+  function sortIndicator(key) {
+    if (state.sort.key !== key) {
+      return `<span class="sort-ind" aria-hidden="true">↕</span>`;
+    }
+    return `<span class="sort-ind is-active" aria-hidden="true">${
+      state.sort.dir === "asc" ? "↑" : "↓"
+    }</span>`;
+  }
+
+  function sortAria(key) {
+    if (state.sort.key !== key) return "none";
+    return state.sort.dir === "asc" ? "ascending" : "descending";
+  }
+
+  function filterActiveClass(key) {
+    const f = state.filters;
+    if (key === "assigned") return f.assigned !== "all" ? " is-filtered" : "";
+    if (f[key] && setHasFilter(f[key])) return " is-filtered";
+    return "";
+  }
+
+  function renderFilterMenu(key, options) {
+    const open = state.openFilter === key;
+    if (!open) return "";
+
+    if (key === "assigned") {
+      const cur = state.filters.assigned;
+      return `
+        <div class="col-filter-menu" role="dialog" aria-label="Filter Assigned to">
+          <label class="col-filter-option"><input type="radio" name="flt-assigned" value="all" ${
+            cur === "all" ? "checked" : ""
+          }/> All</label>
+          <label class="col-filter-option"><input type="radio" name="flt-assigned" value="yes" ${
+            cur === "yes" ? "checked" : ""
+          }/> Assigned</label>
+          <label class="col-filter-option"><input type="radio" name="flt-assigned" value="no" ${
+            cur === "no" ? "checked" : ""
+          }/> Not assigned</label>
+          <div class="col-filter-actions">
+            <button type="button" class="link-btn" data-filter-clear="assigned">Clear</button>
+          </div>
+        </div>`;
+    }
+
+    const selected = state.filters[key];
+    const items = options
+      .map((opt) => {
+        const value = opt.value;
+        const label = opt.label;
+        const checked = selected.has(value) ? "checked" : "";
+        return `<label class="col-filter-option"><input type="checkbox" data-filter-key="${key}" value="${escapeHtml(
+          value
+        )}" ${checked}/> ${escapeHtml(label)}</label>`;
+      })
+      .join("");
+
+    return `
+      <div class="col-filter-menu" role="dialog" aria-label="Filter ${escapeHtml(key)}">
+        ${items || `<p class="col-filter-empty">No values</p>`}
+        <div class="col-filter-actions">
+          <button type="button" class="link-btn" data-filter-clear="${key}">Clear</button>
+        </div>
+      </div>`;
+  }
+
+  function thControls(cfg) {
+    const { key, label, sub, sortable, filterable, filterOptions, className } = cfg;
+    const sortBtn = sortable
+      ? `<button type="button" class="th-sort" data-sort="${key}" aria-label="Sort by ${escapeHtml(
+          label
+        )}">${escapeHtml(label)}${sortIndicator(key)}</button>`
+      : `<span class="th-label">${escapeHtml(label)}</span>`;
+
+    const filterBtn = filterable
+      ? `<button type="button" class="th-filter${filterActiveClass(key)}${
+          state.openFilter === key ? " is-open" : ""
+        }" data-filter-toggle="${key}" aria-label="Filter ${escapeHtml(
+          label
+        )}" aria-expanded="${state.openFilter === key ? "true" : "false"}" title="Filter">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16l-6 7v5l-4 2v-7z"/></svg>
+        </button>`
+      : "";
+
+    const menu = filterable ? renderFilterMenu(key, filterOptions || []) : "";
+    const subHtml = sub ? `<span class="th-sub">${escapeHtml(sub)}</span>` : "";
+
+    return `
+      <th scope="col" class="${className}" aria-sort="${sortable ? sortAria(key) : "none"}">
+        <div class="th-stack">
+          <div class="th-row">
+            ${sortBtn}
+            ${filterBtn}
+          </div>
+          ${subHtml}
+          ${menu}
+        </div>
+      </th>`;
+  }
+
+  function renderTableHeaders() {
+    const short = dateById(state.selectedDateId).short;
+    const hybrids = uniqueSorted(FIELDS.map((f) => f.hybrid)).map((v) => ({ value: v, label: v }));
+    const areas = uniqueSorted(FIELDS.map((f) => f.area)).map((v) => ({ value: v, label: v }));
+    const pickers = uniqueSorted(FIELDS.map((f) => f.picker)).map((v) => ({ value: v, label: v }));
+    const harvests = uniqueSorted(FIELDS.map((f) => f.harvest)).map((v) => ({ value: v, label: v }));
+    const statuses = ["Not Planned", "Planned", "In Progress"].map((v) => ({ value: v, label: v }));
+    const lanes = [
+      { value: "", label: "Assign lane (empty)" },
+      { value: "1", label: "Lane 1" },
+      { value: "2", label: "Lane 2" },
+      { value: "3", label: "Lane 3" },
+      { value: "4", label: "Lane 4" },
+    ];
+
+    els.fieldsHead.innerHTML = `
+      <tr>
+        ${thControls({
+          key: "assigned",
+          label: "Assigned to",
+          sub: "Season overview",
+          sortable: true,
+          filterable: true,
+          className: "col-assigned",
+        })}
+        <th scope="col" class="col-drag"><span class="sr-only">Reorder</span></th>
+        <th scope="col" class="col-check">
+          <input type="checkbox" id="selectAll" aria-label="Select all visible fields" />
+        </th>
+        ${thControls({
+          key: "num",
+          label: "Field #",
+          sortable: true,
+          filterable: false,
+          className: "col-num",
+        })}
+        ${thControls({
+          key: "status",
+          label: "Status",
+          sortable: true,
+          filterable: true,
+          filterOptions: statuses,
+          className: "col-status",
+        })}
+        ${thControls({
+          key: "name",
+          label: "Field Name",
+          sortable: true,
+          filterable: false,
+          className: "col-name",
+        })}
+        ${thControls({
+          key: "hybrid",
+          label: "Hybrid",
+          sortable: true,
+          filterable: true,
+          filterOptions: hybrids,
+          className: "col-hybrid",
+        })}
+        ${thControls({
+          key: "area",
+          label: "Growing Area",
+          sortable: true,
+          filterable: true,
+          filterOptions: areas,
+          className: "col-area",
+        })}
+        ${thControls({
+          key: "picker",
+          label: "Picker Group",
+          sortable: true,
+          filterable: true,
+          filterOptions: pickers,
+          className: "col-picker",
+        })}
+        ${thControls({
+          key: "harvest",
+          label: "Harvest",
+          sortable: true,
+          filterable: true,
+          filterOptions: harvests,
+          className: "col-harvest",
+        })}
+        ${thControls({
+          key: "lane",
+          label: `Lane for ${short}`,
+          sortable: true,
+          filterable: true,
+          filterOptions: lanes,
+          className: "col-lane",
+        })}
+        <th scope="col" class="col-actions">Actions</th>
+      </tr>`;
+
+    wireHeaderEvents();
+  }
+
+  function wireHeaderEvents() {
+    els.fieldsHead.querySelectorAll("[data-sort]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        cycleSort(btn.dataset.sort);
+      });
+    });
+
+    els.fieldsHead.querySelectorAll("[data-filter-toggle]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const key = btn.dataset.filterToggle;
+        state.openFilter = state.openFilter === key ? null : key;
+        renderTable();
+      });
+    });
+
+    els.fieldsHead.querySelectorAll('input[name="flt-assigned"]').forEach((input) => {
+      input.addEventListener("change", () => {
+        state.filters.assigned = input.value;
+        state.unassignedOnly = input.value === "no";
+        els.unassignedOnly.checked = state.unassignedOnly;
+        renderTable();
+        updateBulkBar();
+      });
+    });
+
+    els.fieldsHead.querySelectorAll("input[data-filter-key]").forEach((input) => {
+      input.addEventListener("change", () => {
+        const key = input.dataset.filterKey;
+        const set = state.filters[key];
+        if (input.checked) set.add(input.value);
+        else set.delete(input.value);
+        renderTable();
+        updateBulkBar();
+      });
+    });
+
+    els.fieldsHead.querySelectorAll("[data-filter-clear]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const key = btn.dataset.filterClear;
+        if (key === "assigned") {
+          state.filters.assigned = "all";
+          state.unassignedOnly = false;
+          els.unassignedOnly.checked = false;
+        } else {
+          state.filters[key] = new Set();
+        }
+        renderTable();
+        updateBulkBar();
+      });
+    });
+
+    els.fieldsHead.querySelectorAll(".col-filter-menu").forEach((menu) => {
+      menu.addEventListener("click", (e) => e.stopPropagation());
+      menu.addEventListener("mousedown", (e) => e.stopPropagation());
+    });
+
+    const selectAll = document.getElementById("selectAll");
+    if (selectAll) {
+      selectAll.addEventListener("change", () => {
+        const rows = visibleFields();
+        if (selectAll.checked) rows.forEach((f) => state.selectedIds.add(f.id));
+        else rows.forEach((f) => state.selectedIds.delete(f.id));
+        renderTable();
+        updateBulkBar();
+      });
+    }
+  }
+
+  function renderActiveFiltersBar() {
+    const chips = [];
+    const f = state.filters;
+
+    if (f.assigned === "yes") chips.push({ key: "assigned", label: "Assigned to: Assigned" });
+    if (f.assigned === "no") chips.push({ key: "assigned", label: "Assigned to: Not assigned" });
+
+    const pushSet = (key, title) => {
+      if (!setHasFilter(f[key])) return;
+      const vals = [...f[key]].map((v) => (v === "" ? "Empty" : v === "1" || v === "2" || v === "3" || v === "4" ? `Lane ${v}` : v));
+      chips.push({ key, label: `${title}: ${vals.join(", ")}` });
+    };
+
+    pushSet("status", "Status");
+    pushSet("hybrid", "Hybrid");
+    pushSet("area", "Growing Area");
+    pushSet("picker", "Picker");
+    pushSet("harvest", "Harvest");
+    pushSet("lane", "Lane for date");
+
+    if (!chips.length) {
+      els.activeFilters.hidden = true;
+      els.activeFilters.innerHTML = "";
+      return;
+    }
+
+    els.activeFilters.hidden = false;
+    els.activeFilters.innerHTML = `
+      <span class="active-filters-label">Filters:</span>
+      ${chips
+        .map(
+          (c) =>
+            `<button type="button" class="filter-chip-active" data-clear-chip="${c.key}" title="Clear this filter">${escapeHtml(
+              c.label
+            )} <span aria-hidden="true">×</span></button>`
+        )
+        .join("")}
+      <button type="button" class="link-btn" id="clearAllFilters">Clear all</button>
+    `;
+
+    els.activeFilters.querySelectorAll("[data-clear-chip]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.clearChip;
+        if (key === "assigned") {
+          state.filters.assigned = "all";
+          state.unassignedOnly = false;
+          els.unassignedOnly.checked = false;
+        } else {
+          state.filters[key] = new Set();
+        }
+        renderTable();
+        updateBulkBar();
+      });
+    });
+
+    const clearAll = document.getElementById("clearAllFilters");
+    if (clearAll) {
+      clearAll.addEventListener("click", () => {
+        clearColumnFilters();
+        renderTable();
+        updateBulkBar();
+      });
+    }
+  }
+
+  function renderDateStrip() {
+    els.dateStrip.innerHTML = "";
+    DATES.forEach((d) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "day-card" + (d.id === state.selectedDateId ? " is-selected" : "");
+      btn.setAttribute("role", "option");
+      btn.setAttribute("aria-selected", d.id === state.selectedDateId ? "true" : "false");
+      btn.dataset.dateId = d.id;
+
+      const weekday = d.today ? `Today · ${d.weekday}` : d.weekday;
+      btn.innerHTML = `
+        <span class="day-label">${weekday}</span>
+        <span class="day-date">${d.full}</span>
+        <span class="day-status">${d.status}</span>
+      `;
+      btn.addEventListener("click", () => {
+        if (state.selectedDateId === d.id) return;
+        state.selectedDateId = d.id;
+        closeAssignMenu();
+        render();
+      });
+      els.dateStrip.appendChild(btn);
+    });
+  }
+
+  function laneOptionsHtml(selected) {
+    const sel = selected == null ? "" : String(selected);
+    return LANES.map((opt) => {
+      const isPlaceholder = opt.value === "";
+      const label = isPlaceholder ? "Assign lane" : opt.label;
+      const value = opt.value;
+      const selectedAttr = sel === value ? " selected" : "";
+      return `<option value="${value}"${selectedAttr}>${label}</option>`;
+    }).join("");
+  }
+
+  function pickerOptionsHtml(selected) {
+    return PICKERS.map((p) => {
+      const selectedAttr = p === selected ? " selected" : "";
+      return `<option value="${p}"${selectedAttr}>${p}</option>`;
+    }).join("");
+  }
+
+  function renderAssignedCell(field) {
+    const overview = formatAssignedOverview(field);
+    if (overview.kind === "empty") {
+      return `<div class="assigned-cell is-empty" title="No date or lane assignment this season">Not assigned</div>`;
+    }
+    if (overview.kind === "single") {
+      return `<div class="assigned-cell" title="Season assignment (read-only)">${escapeHtml(
+        overview.text
+      )}</div>`;
+    }
+    const items = overview.list
+      .map((a) => `<li>${escapeHtml(shortLabel(a.dateId))} · Lane ${escapeHtml(a.lane)}</li>`)
+      .join("");
+    return `
+      <div
+        class="assigned-cell is-multi"
+        tabindex="0"
+        aria-describedby="pop-${field.id}"
+        data-multi="${field.id}"
+      >
+        ${escapeHtml(overview.text)}
+        <div class="assigned-popover" id="pop-${field.id}" role="tooltip" hidden>
+          <strong>Season assignments</strong>
+          <ul>${items}</ul>
+        </div>
+      </div>
+    `;
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  /** Status from saved season assignments + harvesting flag. */
+  function getFieldStatus(field) {
+    if (getSavedAssignments(field).length === 0) return "Not Planned";
+    if (field.harvesting) return "In Progress";
+    return "Planned";
+  }
+
+  function statusClass(status) {
+    if (status === "In Progress") return "in-progress";
+    if (status === "Not Planned") return "not-planned";
+    return "planned";
+  }
+
+  function setActiveView(view) {
+    state.activeView = view;
+    const isFields = view === "fields";
+
+    els.tabFields.classList.toggle("is-active", isFields);
+    els.tabLanes.classList.toggle("is-active", !isFields);
+    els.tabFields.setAttribute("aria-selected", isFields ? "true" : "false");
+    els.tabLanes.setAttribute("aria-selected", isFields ? "false" : "true");
+    els.tabFields.tabIndex = isFields ? 0 : -1;
+    els.tabLanes.tabIndex = isFields ? -1 : 0;
+
+    els.panelFields.hidden = !isFields;
+    els.panelLanes.hidden = isFields;
+    els.bulkBar.hidden = !isFields;
+
+    if (!isFields) {
+      closeAssignMenu();
+      renderLanesBoard();
+    }
+  }
+
+  function renderLanesBoard() {
+    const date = dateById(state.selectedDateId);
+    const short = date.short;
+    els.lanesHint.innerHTML = `Lane view for <strong>${short}</strong> — fields assigned to each lane on this date (saved assignments). Switch to <strong>Fields</strong> to edit.`;
+    els.lanesSub.textContent = `Fields grouped by lane for ${short}.`;
+
+    const buckets = {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      unassigned: [],
+    };
+
+    FIELDS.forEach((field) => {
+      const lane = getSavedLane(field, state.selectedDateId);
+      if (lane == null || lane === "") buckets.unassigned.push(field);
+      else if (buckets[lane]) buckets[lane].push(field);
+      else buckets.unassigned.push(field);
+    });
+
+    const columns = [
+      { key: "1", title: "Lane 1" },
+      { key: "2", title: "Lane 2" },
+      { key: "3", title: "Lane 3" },
+      { key: "4", title: "Lane 4" },
+      { key: "unassigned", title: "Unassigned for date" },
+    ];
+
+    els.lanesBoard.innerHTML = columns
+      .map((col) => {
+        const items = buckets[col.key];
+        const cards =
+          items.length === 0
+            ? `<p class="lane-empty">No fields</p>`
+            : items
+                .map((f) => {
+                  const status = getFieldStatus(f);
+                  return `
+              <article class="lane-card">
+                <div class="lane-card-top">
+                  <span class="lane-card-num">#${f.num}</span>
+                  <span class="status-pill ${statusClass(status)}">${status}</span>
+                </div>
+                <div class="lane-card-name">${escapeHtml(f.name)}</div>
+                <div class="lane-card-meta">${escapeHtml(f.hybrid)} · ${escapeHtml(f.picker)}</div>
+              </article>`;
+                })
+                .join("");
+        return `
+          <section class="lane-column" aria-label="${col.title}">
+            <header class="lane-column-head">
+              <h2>${col.title}</h2>
+              <span class="lane-count">${items.length}</span>
+            </header>
+            <div class="lane-column-body">${cards}</div>
+          </section>`;
+      })
+      .join("");
+  }
+
+  function renderTable() {
+    const date = dateById(state.selectedDateId);
+    const short = date.short;
+    const scope =
+      state.unassignedOnly || state.filters.assigned === "no"
+        ? "showing unassigned season fields only"
+        : hasActiveColumnFilters()
+          ? "showing filtered season fields"
+          : "table shows all season fields";
+    els.contextHint.innerHTML = `Planning for <strong>${short}</strong> — ${scope}. Use <strong>Lane for ${short}</strong> to assign. Click column headers to sort; use the funnel to filter.`;
+
+    renderTableHeaders();
+    renderActiveFiltersBar();
+
+    const rows = visibleFields();
+    els.fieldsBody.innerHTML = "";
+    els.emptyState.hidden = rows.length > 0;
+    els.fieldsTable.hidden = rows.length === 0;
+
+    rows.forEach((field) => {
+      const effective = getEffectiveLane(field, state.selectedDateId);
+      const saved = getSavedLane(field, state.selectedDateId);
+      const savedNorm = saved == null ? "" : saved;
+      const effectiveNorm = effective == null ? "" : String(effective);
+      const isDraft =
+        hasDraft(field.id) &&
+        state.drafts[field.id] &&
+        Object.prototype.hasOwnProperty.call(state.drafts[field.id], state.selectedDateId) &&
+        state.drafts[field.id][state.selectedDateId] !== savedNorm;
+
+      const checked = state.selectedIds.has(field.id);
+      const tr = document.createElement("tr");
+      tr.dataset.fieldId = field.id;
+      if (checked) tr.classList.add("is-selected");
+      if (isDraft) tr.classList.add("has-draft");
+
+      const emptyLane = effectiveNorm === "";
+      const laneSelectClass =
+        "lane-select" + (emptyLane ? " is-empty" : "") + (isDraft ? " is-draft" : "");
+
+      tr.innerHTML = `
+        <td class="col-assigned">${renderAssignedCell(field)}</td>
+        <td class="col-drag">
+          <span class="drag-handle" title="Drag to reorder" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><circle cx="5" cy="4" r="1.2"/><circle cx="11" cy="4" r="1.2"/><circle cx="5" cy="8" r="1.2"/><circle cx="11" cy="8" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="11" cy="12" r="1.2"/></svg>
+          </span>
+        </td>
+        <td class="col-check">
+          <input type="checkbox" class="row-check" data-id="${field.id}" aria-label="Select field ${field.num}" ${
+        checked ? "checked" : ""
+      } />
+        </td>
+        <td class="col-num">${field.num}</td>
+        <td class="col-status"><span class="status-pill ${statusClass(getFieldStatus(field))}">${
+        getFieldStatus(field)
+      }</span></td>
+        <td class="col-name">${escapeHtml(field.name)}</td>
+        <td class="col-hybrid">${escapeHtml(field.hybrid)}</td>
+        <td class="col-area">${escapeHtml(field.area)}</td>
+        <td class="col-picker">
+          <select class="picker-select" aria-label="Picker group for field ${field.num}">
+            ${pickerOptionsHtml(field.picker)}
+          </select>
+        </td>
+        <td class="col-harvest">${escapeHtml(field.harvest)}</td>
+        <td class="col-lane">
+          <select
+            class="${laneSelectClass}"
+            data-field="${field.id}"
+            aria-label="Lane for ${short}, field ${field.num}"
+          >
+            ${laneOptionsHtml(effectiveNorm)}
+          </select>
+        </td>
+        <td class="col-actions">
+          <div class="actions">
+            <button type="button" class="icon-btn" aria-label="Open calendar for field ${field.num}">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+            </button>
+            <button type="button" class="icon-btn" aria-label="More actions for field ${field.num}">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1.4" fill="currentColor" stroke="none"/></svg>
+            </button>
+          </div>
+        </td>
+      `;
+      els.fieldsBody.appendChild(tr);
+    });
+
+    // Select-all state
+    const selectAll = document.getElementById("selectAll");
+    if (selectAll) {
+      const allIds = rows.map((r) => r.id);
+      const allChecked = allIds.length > 0 && allIds.every((id) => state.selectedIds.has(id));
+      const someChecked = allIds.some((id) => state.selectedIds.has(id));
+      selectAll.checked = allChecked;
+      selectAll.indeterminate = someChecked && !allChecked;
+    }
+
+    wireRowEvents();
+  }
+
+  function wireRowEvents() {
+    els.fieldsBody.querySelectorAll(".row-check").forEach((cb) => {
+      cb.addEventListener("change", () => {
+        const id = cb.dataset.id;
+        if (cb.checked) state.selectedIds.add(id);
+        else state.selectedIds.delete(id);
+        updateBulkBar();
+        cb.closest("tr").classList.toggle("is-selected", cb.checked);
+      });
+    });
+
+    els.fieldsBody.querySelectorAll(".lane-select").forEach((sel) => {
+      sel.addEventListener("change", () => {
+        const fieldId = sel.dataset.field;
+        const field = FIELDS.find((f) => f.id === fieldId);
+        const dateId = state.selectedDateId;
+        const next = sel.value;
+        const saved = getSavedLane(field, dateId);
+        const savedNorm = saved == null ? "" : saved;
+
+        if (!state.drafts[fieldId]) state.drafts[fieldId] = {};
+
+        if (next === savedNorm) {
+          delete state.drafts[fieldId][dateId];
+          if (Object.keys(state.drafts[fieldId]).length === 0) delete state.drafts[fieldId];
+        } else {
+          state.drafts[fieldId][dateId] = next;
+        }
+
+        // Re-render to refresh draft styling; keep selection
+        renderTable();
+        updateBulkBar();
+      });
+    });
+
+    els.fieldsBody.querySelectorAll(".assigned-cell.is-multi").forEach((cell) => {
+      const pop = cell.querySelector(".assigned-popover");
+      const show = () => {
+        pop.hidden = false;
+      };
+      const hide = () => {
+        pop.hidden = true;
+      };
+      cell.addEventListener("mouseenter", show);
+      cell.addEventListener("mouseleave", hide);
+      cell.addEventListener("focus", show);
+      cell.addEventListener("blur", hide);
+      cell.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") hide();
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          pop.hidden = !pop.hidden;
+        }
+      });
+    });
+  }
+
+  function updateBulkBar() {
+    const n = state.selectedIds.size;
+    els.selectionCount.textContent = n === 1 ? "1 field selected" : `${n} fields selected`;
+    els.assignToBtn.disabled = n === 0;
+
+    const dirty = countDirty();
+    if (dirty > 0) {
+      els.dirtyCount.textContent =
+        dirty === 1 ? "1 unsaved change" : `${dirty} unsaved changes`;
+      els.dirtyCount.classList.add("is-dirty");
+      els.saveBtn.disabled = false;
+    } else {
+      els.dirtyCount.textContent = "No unsaved changes";
+      els.dirtyCount.classList.remove("is-dirty");
+      els.saveBtn.disabled = true;
+    }
+
+    if (n === 0) closeAssignMenu();
+  }
+
+  function closeAssignMenu() {
+    state.assignMenuOpen = false;
+    els.assignToMenu.hidden = true;
+    els.assignToBtn.setAttribute("aria-expanded", "false");
+  }
+
+  function openAssignMenu() {
+    if (els.assignToBtn.disabled) return;
+    state.assignMenuOpen = true;
+    els.assignToMenu.hidden = false;
+    els.assignToBtn.setAttribute("aria-expanded", "true");
+    const first = els.assignToMenu.querySelector('[role="option"]');
+    if (first) first.focus?.();
+  }
+
+  function applyBulkLane(lane) {
+    const dateId = state.selectedDateId;
+    state.selectedIds.forEach((fieldId) => {
+      const field = FIELDS.find((f) => f.id === fieldId);
+      if (!field) return;
+      const saved = getSavedLane(field, dateId);
+      const savedNorm = saved == null ? "" : saved;
+      if (!state.drafts[fieldId]) state.drafts[fieldId] = {};
+      if (lane === savedNorm) {
+        delete state.drafts[fieldId][dateId];
+        if (Object.keys(state.drafts[fieldId]).length === 0) delete state.drafts[fieldId];
+      } else {
+        state.drafts[fieldId][dateId] = lane;
+      }
+    });
+    closeAssignMenu();
+    renderTable();
+    updateBulkBar();
+    const label = lane === "" ? "Unassigned" : `Lane ${lane}`;
+    showToast(`Draft: ${state.selectedIds.size} field(s) → ${label} for ${shortLabel(dateId)}`);
+  }
+
+  function saveChanges() {
+    let applied = 0;
+    FIELDS.forEach((field) => {
+      const draftMap = state.drafts[field.id];
+      if (!draftMap) return;
+      Object.keys(draftMap).forEach((dateId) => {
+        const lane = draftMap[dateId];
+        const idx = field.assignments.findIndex((a) => a.dateId === dateId);
+        if (lane === "") {
+          if (idx >= 0) {
+            field.assignments.splice(idx, 1);
+            applied += 1;
+          }
+        } else if (idx >= 0) {
+          if (field.assignments[idx].lane !== lane) {
+            field.assignments[idx].lane = lane;
+            applied += 1;
+          }
+        } else {
+          field.assignments.push({ dateId, lane });
+          applied += 1;
+        }
+      });
+      if (field.assignments.length === 0) field.harvesting = false;
+      delete state.drafts[field.id];
+    });
+    render();
+    showToast(applied ? `Saved ${applied} assignment change(s).` : "Nothing to save.");
+  }
+
+  let toastTimer;
+  function showToast(msg) {
+    els.toast.hidden = false;
+    els.toast.textContent = msg;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      els.toast.hidden = true;
+    }, 2600);
+  }
+
+  function render() {
+    renderDateStrip();
+    if (state.activeView === "fields") {
+      renderTable();
+      updateBulkBar();
+    } else {
+      renderLanesBoard();
+    }
+  }
+
+  function bindGlobal() {
+    els.tabFields.addEventListener("click", () => setActiveView("fields"));
+    els.tabLanes.addEventListener("click", () => setActiveView("lanes"));
+
+    els.tabFields.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        els.tabLanes.focus();
+        setActiveView("lanes");
+      }
+    });
+    els.tabLanes.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        els.tabFields.focus();
+        setActiveView("fields");
+      }
+    });
+
+    els.unassignedOnly.addEventListener("change", () => {
+      state.unassignedOnly = els.unassignedOnly.checked;
+      state.filters.assigned = state.unassignedOnly ? "no" : "all";
+      state.openFilter = null;
+      renderTable();
+      updateBulkBar();
+    });
+
+    els.searchFields.addEventListener("input", () => {
+      state.search = els.searchFields.value;
+      renderTable();
+    });
+
+    els.assignToBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (state.assignMenuOpen) closeAssignMenu();
+      else openAssignMenu();
+    });
+
+    els.assignToMenu.querySelectorAll('[role="option"]').forEach((opt) => {
+      opt.setAttribute("tabindex", "0");
+      opt.addEventListener("click", () => {
+        applyBulkLane(opt.dataset.lane);
+      });
+      opt.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          applyBulkLane(opt.dataset.lane);
+        }
+      });
+    });
+
+    els.saveBtn.addEventListener("click", saveChanges);
+
+    document.addEventListener("click", (e) => {
+      if (state.assignMenuOpen && !e.target.closest(".assign-menu-wrap")) {
+        closeAssignMenu();
+      }
+      if (state.openFilter && !e.target.closest(".th-stack")) {
+        state.openFilter = null;
+        renderTable();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeAssignMenu();
+        if (state.openFilter) {
+          state.openFilter = null;
+          renderTable();
+        }
+      }
+    });
+  }
+
+  bindGlobal();
+  setActiveView("fields");
+  render();
+})();
+
+    </script>
+  </body>
+</html>
